@@ -24,15 +24,17 @@ public class MainActivity extends AppCompatActivity {
         btnSlide = (Button) findViewById(R.id.btnSlide);
         btnFade = (Button) findViewById(R.id.btnFade);
         btnExplode = (Button) findViewById(R.id.btnExplode);
-        //, btnFade, btnExplode
+        btnSlide.setOnClickListener(onClickListener);
+        btnFade.setOnClickListener(onClickListener);
+        btnExplode.setOnClickListener(onClickListener);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DetilActivity.class);
+                /*Intent intent = new Intent(MainActivity.this, DetilActivity.class);
                 intent.putExtra("animType", DetilActivity.EXPLODE);
-                startActivity(intent);
+                startActivity(intent);*/
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
             }
@@ -42,7 +44,15 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(MainActivity.this, DetilActivity.class);
+            if (v == btnExplode) {
+                intent.putExtra("animType", DetilActivity.ZOOM);
+            } else if (v == btnFade){
+                intent.putExtra("animType", DetilActivity.SWIPE_VERTICAL);
+            } else if (v == btnSlide){
+                intent.putExtra("animType", DetilActivity.SLIDE_HORIZONTAL);
+            }
+            startActivity(intent);
         }
     };
 
